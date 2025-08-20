@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luxury Concierge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* General & Variable Styles */
+      :root {
+        --bg-primary: #f5f5f5;
+        --bg-secondary: #ffffff;
+        --text-primary: #212121;
+        --text-secondary: #757575;
+        --accent-color: #b8860b; /* DarkGoldenrod for a luxurious feel */
+        --accent-hover: #a5740a;
+        --border-color: #e0e0e0;
+        --shadow-light: rgba(0, 0, 0, 0.05);
+        --shadow-medium: rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .app-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        background-color: var(--bg-secondary);
+        border-radius: 1.5rem;
+        box-shadow: 0 10px 30px var(--shadow-medium);
+        overflow: hidden;
+        min-height: 90vh;
+      }
+
+      /* Header & Navigation */
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 2.5rem;
+        border-bottom: 1px solid var(--border-color);
+        background-color: var(--bg-secondary);
+      }
+
+      .header .logo {
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: var(--accent-color);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-weight: 600;
+        font-size: 1rem;
+        transition: color 0.2s ease;
+      }
+
+      .nav-links a.active {
+        color: var(--accent-color);
+        border-bottom: 2px solid var(--accent-color);
+        padding-bottom: 0.25rem;
+      }
+
+      .nav-links a:hover {
+        color: var(--accent-color);
+      }
+
+      .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        cursor: pointer;
+      }
+
+      .user-profile img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid var(--accent-color);
+        box-shadow: 0 0 5px var(--shadow-light);
+      }
+
+      .user-profile span {
+        font-weight: 600;
+      }
+
+      /* Main Content */
+      .main-content {
+        padding: 2.5rem;
+      }
+
+      .page-section {
+        display: none;
+      }
+
+      .page-section.active {
+        display: block;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 2rem;
+        color: var(--text-primary);
+      }
+
+      /* Dashboard Section */
+      .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .card {
+        background-color: var(--bg-primary);
+        border-radius: 1.25rem;
+        padding: 2rem;
+        box-shadow: 0 4px 15px var(--shadow-light);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px var(--shadow-medium);
+      }
+
+      .card h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-top: 0;
+      }
+
+      .card p {
+        font-size: 1rem;
+        color: var(--text-secondary);
+      }
+
+      .service-list {
+        list-style: none;
+        padding: 0;
+        margin-top: 1rem;
+      }
+
+      .service-list li {
+        margin-bottom: 0.5rem;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .service-list li span {
+        color: var(--accent-color);
+        margin-right: 0.5rem;
+      }
+
+      /* Services Section */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .service-card {
+        background-color: var(--bg-primary);
+        border-radius: 1.25rem;
+        overflow: hidden;
+        box-shadow: 0 4px 15px var(--shadow-light);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer;
+        text-decoration: none;
+        color: var(--text-primary);
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px var(--shadow-medium);
+      }
+
+      .service-image {
+        width: 100%;
+        height: 200px;
+        background-color: var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: var(--text-secondary);
+      }
+
+      .service-content {
+        padding: 1.5rem;
+      }
+
+      .service-content h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin: 0;
+      }
+
+      .service-content p {
+        margin-top: 0.5rem;
+        color: var(--text-secondary);
+      }
+
+      /* Profile Section */
+      .profile-card {
+        background-color: var(--bg-primary);
+        border-radius: 1.25rem;
+        padding: 2.5rem;
+        box-shadow: 0 4px 15px var(--shadow-light);
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .profile-card h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      .profile-card p {
+        color: var(--text-secondary);
+      }
+
+      /* Mobile-First Adaptations */
+      @media (max-width: 768px) {
+        .app-container {
+          margin: 0;
+          border-radius: 0;
+          box-shadow: none;
+        }
+
+        .header {
+          padding: 1rem 1.5rem;
+        }
+
+        .header .logo {
+          font-size: 1.5rem;
+        }
+
+        .nav-links {
+          display: none; /* Hide main nav on mobile, use a more mobile-friendly solution like a hamburger menu or bottom bar if needed */
+        }
+
+        .user-profile {
+          font-size: 0.875rem;
+        }
+
+        .main-content {
+          padding: 1.5rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .dashboard-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Header & Navigation -->
+      <header class="header">
+        <div class="logo">LUXURY</div>
+        <nav class="nav-links">
+          <a href="#dashboard" class="nav-link active">Dashboard</a>
+          <a href="#services" class="nav-link">Services</a>
+          <a href="#profile" class="nav-link">Profile</a>
+        </nav>
+        <div class="user-profile">
+          <img
+            src="https://placehold.co/40x40/E0E0E0/757575?text=U"
+            alt="User Profile Image"
+          />
+          <span>Jane Doe</span>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="page-section active">
+          <h2 class="section-title">Welcome, Jane.</h2>
+          <div class="dashboard-grid">
+            <div class="card">
+              <h3>Your Requests</h3>
+              <p>
+                You have 1 active request. Your private jet charter is confirmed
+                for tomorrow.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Upcoming Events</h3>
+              <p>
+                Your reservation at "Le Ciel" is confirmed for Friday at 8:00
+                PM.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Featured Services</h3>
+              <ul class="service-list">
+                <li><span>&#x2728;</span> Bespoke Jewelry Design</li>
+                <li><span>&#x2728;</span> Yacht Chartering</li>
+                <li><span>&#x2728;</span> Exclusive Event Access</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="page-section">
+          <h2 class="section-title">Explore Our Services</h2>
+          <div class="services-grid">
+            <a href="#" class="service-card">
+              <div class="service-image">Placeholder</div>
+              <div class="service-content">
+                <h3>Private Jet Charter</h3>
+                <p>Travel in style and privacy to any destination worldwide.</p>
+              </div>
+            </a>
+            <a href="#" class="service-card">
+              <div class="service-image">Placeholder</div>
+              <div class="service-content">
+                <h3>Bespoke Travel</h3>
+                <p>
+                  Custom-crafted itineraries for an unparalleled travel
+                  experience.
+                </p>
+              </div>
+            </a>
+            <a href="#" class="service-card">
+              <div class="service-image">Placeholder</div>
+              <div class="service-content">
+                <h3>Fine Dining Reservations</h3>
+                <p>
+                  Access to the world's most exclusive and sought-after
+                  restaurants.
+                </p>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profile" class="page-section">
+          <h2 class="section-title">My Profile</h2>
+          <div class="profile-card">
+            <img
+              src="https://placehold.co/100x100/E0E0E0/757575?text=U"
+              alt="User Profile Image"
+              style="width: 100px; height: 100px"
+            />
+            <h3>Jane Doe</h3>
+            <p>Member since: 2023</p>
+            <p>Tier: Platinum</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const navLinks = document.querySelectorAll(".nav-link");
+        const sections = document.querySelectorAll(".page-section");
+
+        // Function to handle section switching
+        const switchSection = (targetId) => {
+          navLinks.forEach((nav) => nav.classList.remove("active"));
+          sections.forEach((sec) => sec.classList.remove("active"));
+
+          const targetLink = document.querySelector(
+            `.nav-link[href="#${targetId}"]`
+          );
+          const targetSection = document.getElementById(targetId);
+
+          if (targetLink) targetLink.classList.add("active");
+          if (targetSection) targetSection.classList.add("active");
+        };
+
+        // Event listeners for navigation links
+        navLinks.forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute("href").substring(1);
+            switchSection(targetId);
+          });
+        });
+
+        // Handle initial page load hash
+        const initialHash = window.location.hash.substring(1);
+        if (initialHash && document.getElementById(initialHash)) {
+          switchSection(initialHash);
+        }
+      });
+    </script>
+  </body>
+</html>

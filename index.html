@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adarsh Dubey - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* General Styles */
+      :root {
+        --bg-primary: #f0f4f7;
+        --bg-secondary: #ffffff;
+        --text-primary: #1a1a1a;
+        --text-secondary: #4a4a4a;
+        --accent-color: #008080; /* Teal */
+        --card-border: #e0e6e9;
+        --card-hover-bg: #eaf1f4;
+        --button-color: #ff6347; /* Tomato */
+        --button-hover: #ff4500; /* OrangeRed */
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
+        margin: 0;
+        padding-top: 60px; /* Space for the fixed header */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      /* Navigation Header */
+      .nav-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-secondary);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        z-index: 1000;
+        padding: 0.75rem 0;
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .nav-link {
+        text-decoration: none;
+        color: var(--text-primary);
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      .nav-link:hover {
+        background-color: var(--accent-color);
+        color: var(--bg-secondary);
+      }
+
+      /* Section Styling */
+      section {
+        padding: 4rem 0;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 800;
+        margin-bottom: 2rem;
+        color: var(--text-primary);
+      }
+
+      /* Header Section */
+      .header {
+        text-align: center;
+        margin-bottom: 0;
+        padding-top: 2rem;
+      }
+
+      .header h1 {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 800;
+        letter-spacing: -1px;
+        margin-bottom: 0.5rem;
+      }
+
+      .header p {
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
+        color: var(--text-secondary);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* About & Contact Section */
+      .about-section,
+      .contact-section {
+        background-color: var(--bg-secondary);
+        border-radius: 1.5rem;
+        padding: 2rem;
+        margin-bottom: 4rem;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .about-section p,
+      .contact-section p {
+        font-size: clamp(1rem, 2.5vw, 1.125rem);
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+      }
+
+      /* Portfolio Section - Products Upgraded */
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      @media (min-width: 768px) {
+        .portfolio-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .project-card {
+        background-color: var(--bg-secondary);
+        border-radius: 1rem;
+        padding: 2.5rem;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--card-border);
+      }
+
+      .project-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .project-card h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 1rem;
+        color: var(--accent-color);
+      }
+
+      .project-card p {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+      }
+
+      .project-button {
+        display: inline-block;
+        background-color: var(--button-color);
+        color: #fff;
+        padding: 0.75rem 1.5rem;
+        border-radius: 9999px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        cursor: pointer;
+        border: none;
+      }
+
+      .project-button:hover {
+        background-color: var(--button-hover);
+        transform: translateY(-2px);
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        margin-top: 4rem;
+        padding-bottom: 2rem;
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Header -->
+    <nav class="nav-header">
+      <div class="nav-container">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <!-- Header Section -->
+      <header id="home" class="header">
+        <h1>Adarsh Dubey</h1>
+        <p>
+          Seasoned Software Developer with 5+ years of experience in building
+          large-scale systems, specializing in AI/ML-driven applications for
+          diverse markets.
+        </p>
+      </header>
+
+      <!-- About Me Section -->
+      <section id="about" class="about-section">
+        <h2 class="section-title">About Me</h2>
+        <p>
+          I'm a dedicated software developer with a strong foundation in
+          building robust and scalable systems. My expertise lies in leveraging
+          artificial intelligence and machine learning to create innovative
+          solutions across various industries, from fintech to urban planning. I
+          am passionate about tackling complex technical challenges and
+          delivering high-quality, impactful products.
+        </p>
+      </section>
+
+      <!-- Portfolio Section -->
+      <section id="projects">
+        <h2 class="section-title">My Projects</h2>
+        <p>
+          Here are some of my recent projects that showcase my skills in
+          software development, AI/ML integration, and user-centric design.
+          These are responsive, scalable, and built with a focus on performance
+          and user experience. Each project highlights my ability to solve
+          real-world problems and deliver value through technology.
+        </p>
+        <div class="portfolio-grid">
+          <!-- Project Card 1 -->
+          <div class="project-card">
+            <div class="project-card-content">
+              <h3 class="project-title">AI-Powered Personal Finance Tracker</h3>
+              <p class="project-description">
+                A financial management application leveraging AI/ML to provide
+                personalized budgeting, automated expense categorization, and
+                intelligent savings recommendations. This project demonstrates
+                expertise in fintech, data visualization, and secure data
+                handling.
+              </p>
+              <a href="personal_finance_traker.html" class="project-button"
+                >Explore Project
+                <span style="font-size: 12px">(sample MVP)</span></a
+              >
+            </div>
+          </div>
+
+          <!-- Project Card 2 -->
+          <div class="project-card">
+            <div class="project-card-content">
+              <h3 class="project-title">On-Demand Niche Service Marketplace</h3>
+              <p class="project-description">
+                A two-sided marketplace connecting users with specialized
+                service providers in a specific niche. Features include
+                real-time booking, GPS tracking, and an integrated rating
+                system. Built for scalability to handle high user loads.
+              </p>
+              <a href="service_finder.html" class="project-button"
+                >Explore Project
+                <span style="font-size: 12px">(sample MVP)</span></a
+              >
+            </div>
+          </div>
+
+          <!-- Project Card 3 -->
+          <div class="project-card">
+            <div class="project-card-content">
+              <h3 class="project-title">
+                Cross-Platform Healthcare and Wellness App
+              </h3>
+              <p class="project-description">
+                A wellness application focusing on mental health and fitness. It
+                features secure user profiles, tele-health video conferencing
+                capabilities, and seamless integration with wearable devices,
+                prioritizing user data privacy and security.
+              </p>
+              <a href="healthcare_and_wellness.html" class="project-button"
+                >Explore Project
+                <span style="font-size: 12px">(sample MVP)</span></a
+              >
+            </div>
+          </div>
+
+          <!-- Project Card 4 -->
+          <div class="project-card">
+            <div class="project-card-content">
+              <h3 class="project-title">Luxury & Lifestyle Concierge App</h3>
+              <p class="project-description">
+                An exclusive mobile application for a discerning clientele,
+                offering on-demand access to luxury services. Showcases
+                expertise in high-end UI/UX design, secure payment gateways, and
+                backend systems for real-time service fulfillment.
+              </p>
+              <a href="luxory_consierge_app.html" class="project-button"
+                >Explore Project
+                <span style="font-size: 12px">(sample MVP)</span></a
+              >
+            </div>
+          </div>
+
+          <!-- Project Card 5 -->
+          <!-- <div class="project-card">
+            <div class="project-card-content">
+              <h3 class="project-title">
+                Smart City & IoT Integration Platform
+              </h3>
+              <p class="project-description">
+                A platform designed for smart community management, integrating
+                with Internet of Things (IoT) devices to control building
+                access, book amenities, and facilitate communication.
+                Demonstrates knowledge of IoT protocols and scalable
+                architecture.
+              </p>
+              <a href="#" class="project-button">Explore Project</a>
+            </div>
+          </div> -->
+
+          <!-- Project Card 6 -->
+          <!-- <div class="project-card">
+            <div class="project-card-content">
+              <h3 class="project-title">AR-Powered Real Estate Showcase</h3>
+              <p class="project-description">
+                An innovative real estate application that uses Augmented
+                Reality (AR) to provide virtual property tours and a
+                'view-in-your-home' feature for decor. Highlights expertise in
+                computer vision, AR/VR technologies, and a focus on user
+                experience.
+              </p>
+              <a href="#" class="project-button">Explore Project</a>
+            </div>
+          </div> -->
+        </div>
+      </section>
+
+      <!-- Contact Me Section -->
+      <section id="contact" class="contact-section">
+        <h2 class="section-title">Contact Me</h2>
+        <p>
+          I'm always excited to discuss new projects, collaboration
+          opportunities, and complex technical challenges. Feel free to reach
+          out to me directly.
+        </p>
+        <a
+          href="mailto:adarsh.dubey64@gmail.com?subject=Need%20a%20project%20made&body=Hi%20adarsh%2C"
+          class="project-button"
+          >Mail Me</a
+        >
+      </section>
+
+      <!-- Footer Section -->
+      <footer class="footer">
+        <p>&copy; 2024 Adarsh Dubey. All rights reserved.</p>
+      </footer>
+    </div>
+  </body>
+</html>

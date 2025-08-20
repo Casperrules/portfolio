@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Niche Service Marketplace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* General & Variable Styles */
+      :root {
+        --bg-primary: #f8f9fa;
+        --bg-secondary: #ffffff;
+        --text-primary: #212529;
+        --text-secondary: #6c757d;
+        --accent-color: #007bff; /* Blue for call-to-action */
+        --accent-hover: #0056b3;
+        --border-color: #e9ecef;
+        --shadow-light: rgba(0, 0, 0, 0.05);
+        --shadow-medium: rgba(0, 0, 0, 0.1);
+        --star-color: #ffc107; /* Gold for ratings */
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .app-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: var(--bg-secondary);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 0 20px var(--shadow-light);
+      }
+
+      /* Header & Navigation */
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .header .logo {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--text-primary);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-weight: 600;
+        transition: color 0.2s ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--accent-color);
+      }
+
+      .user-profile {
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      /* Main Content */
+      .main-content {
+        flex-grow: 1;
+        padding: 2rem;
+      }
+
+      .page-section {
+        display: none;
+      }
+
+      .page-section.active {
+        display: block;
+      }
+
+      /* Home Page - Search & Discovery */
+      .search-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 3rem 1rem;
+        background-color: var(--bg-primary);
+        border-radius: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .search-section h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+      }
+
+      .search-section p {
+        font-size: 1.125rem;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+      }
+
+      .search-bar {
+        display: flex;
+        width: 100%;
+        max-width: 600px;
+        background-color: var(--bg-secondary);
+        border-radius: 2rem;
+        box-shadow: 0 4px 10px var(--shadow-light);
+        padding: 0.5rem;
+      }
+
+      .search-bar input {
+        flex-grow: 1;
+        border: none;
+        outline: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 2rem;
+        background: transparent;
+      }
+
+      .search-bar button {
+        background-color: var(--accent-color);
+        color: var(--bg-secondary);
+        border: none;
+        border-radius: 2rem;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+
+      .search-bar button:hover {
+        background-color: var(--accent-hover);
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .service-card {
+        background-color: var(--bg-secondary);
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 4px 15px var(--shadow-light);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer;
+        text-decoration: none;
+        color: var(--text-primary);
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px var(--shadow-medium);
+      }
+
+      .service-card .service-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        background-color: var(--bg-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-secondary);
+        font-size: 1.5rem;
+      }
+
+      .service-card-content {
+        padding: 1rem;
+      }
+
+      .service-card-content h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+      }
+
+      .service-card-content p {
+        margin: 0 0 0.5rem;
+        color: var(--text-secondary);
+      }
+
+      .rating-price {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1rem;
+      }
+
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        color: var(--star-color);
+        font-weight: 600;
+      }
+
+      .price {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--accent-color);
+      }
+
+      /* Service Detail Page */
+      .service-detail-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .service-image-large {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        border-radius: 1rem;
+        background-color: var(--bg-primary);
+      }
+
+      .service-info {
+        background-color: var(--bg-secondary);
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 15px var(--shadow-light);
+      }
+
+      .service-info h2 {
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+      }
+
+      .service-info .rating {
+        margin-bottom: 1rem;
+      }
+
+      .service-info .price {
+        font-size: 2rem;
+        margin-top: 1.5rem;
+      }
+
+      .service-info .booking-button {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.125rem;
+        font-weight: 700;
+        background-color: var(--accent-color);
+        color: var(--bg-secondary);
+        border: none;
+        border-radius: 0.75rem;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        margin-top: 1.5rem;
+      }
+
+      /* Media Queries for Mobile */
+      @media (max-width: 768px) {
+        .header {
+          flex-direction: column;
+          padding: 1rem;
+          gap: 1rem;
+          text-align: center;
+        }
+
+        .nav-links {
+          display: none; /* Hide for now, could be a hamburger menu */
+        }
+
+        .user-profile {
+          margin-top: 0.5rem;
+        }
+
+        .main-content {
+          padding: 1rem;
+        }
+
+        .search-section {
+          padding: 2rem 0.5rem;
+        }
+
+        .search-bar {
+          flex-direction: column;
+          padding: 0;
+        }
+
+        .search-bar input {
+          border-radius: 2rem;
+          padding: 1rem 1.5rem;
+        }
+
+        .search-bar button {
+          margin-top: 1rem;
+          padding: 1rem;
+          width: 100%;
+        }
+
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Header -->
+      <header class="header">
+        <div class="logo">Service Finder</div>
+        <nav class="nav-links">
+          <a href="#">Categories</a>
+          <a href="#">How it Works</a>
+          <a href="#">About Us</a>
+        </nav>
+        <div class="user-profile">
+          <!-- User icon placeholder -->
+          <span>👤</span>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Home Page -->
+        <section id="home-page" class="page-section active">
+          <div class="search-section">
+            <h1>Find Your Niche Expert. Instantly.</h1>
+            <p>
+              Connecting you with specialized professionals for any task, on
+              your terms.
+            </p>
+            <div class="search-bar">
+              <input type="text" placeholder="Search for a service..." />
+              <button>Search</button>
+            </div>
+          </div>
+
+          <div class="services-grid">
+            <!-- Service Card 1 -->
+            <a href="#service-detail-1" class="service-card">
+              <div class="service-image">Placeholder Image</div>
+              <div class="service-card-content">
+                <h3>Dog Grooming Specialist</h3>
+                <p>Certified pet groomer with 10+ years of experience.</p>
+                <div class="rating-price">
+                  <span class="rating"> ⭐ 4.9 </span>
+                  <span class="price">$50 - $100</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Service Card 2 -->
+            <a href="#service-detail-2" class="service-card">
+              <div class="service-image">Placeholder Image</div>
+              <div class="service-card-content">
+                <h3>Local Apiary Honey Delivery</h3>
+                <p>
+                  Fresh, local honey delivered directly from the hive to your
+                  door.
+                </p>
+                <div class="rating-price">
+                  <span class="rating"> ⭐ 4.7 </span>
+                  <span class="price">$25 / jar</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Service Card 3 -->
+            <a href="#service-detail-3" class="service-card">
+              <div class="service-image">Placeholder Image</div>
+              <div class="service-card-content">
+                <h3>Vintage Watch Repair</h3>
+                <p>
+                  Expert horologist specializing in pre-1980s mechanical
+                  watches.
+                </p>
+                <div class="rating-price">
+                  <span class="rating"> ⭐ 5.0 </span>
+                  <span class="price">Quote</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- Service Detail Page - Conceptual -->
+        <section id="service-detail-1" class="page-section">
+          <div class="service-detail-container">
+            <img
+              src="https://placehold.co/800x350/E9ECEF/6C757D?text=Placeholder+Image"
+              alt="Service Image"
+              class="service-image-large"
+            />
+            <div class="service-info">
+              <h2>Dog Grooming Specialist</h2>
+              <span class="rating">⭐ 4.9 (125 reviews)</span>
+              <p>
+                John Doe is a certified pet groomer with over 10 years of
+                experience. Specializing in difficult-to-groom breeds, he uses
+                all-natural, hypoallergenic products to ensure the best care for
+                your pet. Real-time GPS tracking is available during the
+                service.
+              </p>
+              <p>Availability: Mon - Sat, 9am - 5pm</p>
+              <div class="rating-price">
+                <span class="price">$50 - $100</span>
+              </div>
+              <button class="booking-button">Book Now</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const pageLinks = document.querySelectorAll('a[href^="#"]');
+        const sections = document.querySelectorAll(".page-section");
+
+        // Function to handle page switching
+        const switchPage = (targetId) => {
+          sections.forEach((sec) => sec.classList.remove("active"));
+          const targetSection = document.getElementById(targetId);
+          if (targetSection) {
+            targetSection.classList.add("active");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
+        };
+
+        // Event listeners for internal navigation links
+        pageLinks.forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute("href").substring(1);
+            switchPage(targetId);
+          });
+        });
+
+        // Handle initial page load hash
+        const initialHash = window.location.hash.substring(1);
+        if (initialHash && document.getElementById(initialHash)) {
+          switchPage(initialHash);
+        }
+      });
+    </script>
+  </body>
+</html>
